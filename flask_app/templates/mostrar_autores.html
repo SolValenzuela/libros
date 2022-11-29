@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Mostrar Autores</title>
+</head>
+
+<body>
+    <div class="d-flex justify-content-around flex-wrap">
+        <form action="/join/libro" method="post" class="col-5 mx-auto border p-5 my-5 text-light bg-secondary">
+            <h2 class="text-info">Agregar favoritos</h2>
+            <input type="hidden" name="autor_id" value="{{autor.id}}">
+            <div class="form-group">
+                <label for="libro_id">Libro:</label>
+                <select name="libro_id" class="form-control">
+                    {% for libro in libros_sin_favoritos %}
+                    <option value="{{libro.id}}">{{libro.titulo}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="submit" value="Agregar " class="btn btn-warning">
+        </form>
+        <!-- muestra los libros favoritos del autor -->
+        <div class="col-5 mx-auto border p-5 my-5 text-light bg-secondary">
+            <h2 class="text-center text-warning">Los libros favoritos de {{autor.nombre}}</h2>
+            <table class="table table-warning">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>N° de páginas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for libro in autor.libros_favoritos %}
+                    <tr>
+                        <td>{{ libro.titulo }}</td>
+                        <td>{{ libro.num_de_paginas }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="d-flex justify-content-around flex-wrap">
+        <h5>
+            <a href="/">HOME</a>
+        </h5>
+    </div>
+
+</body>
+
+</html>
